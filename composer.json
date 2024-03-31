@@ -1,0 +1,18 @@
+{
+    "name": "dantepiazza/dolibarr-sdk",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Dantepiazza\\DolibarrSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dante Piazza Quiroga",
+            "email": "dante.7h@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    }
+}
