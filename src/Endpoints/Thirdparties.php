@@ -22,5 +22,18 @@ class Thirdparties {
 
 		return $this -> adapter -> exec('post', 'thirdparties') -> response;
 	}
+
+	/**
+	 * List thirdparties
+	 * 
+	 * @since 1.0
+	 *
+	 * @param array $options
+	 *
+	 * @return Dolibarr\Adapter\Response
+	 **/
+	public function All(array $options = []) {
+		return $this -> adapter -> exec('get', 'thirdparties', $options) -> response;
+	}
 }
 

@@ -68,8 +68,9 @@ class Dolibarr{
 
 	public function exec(string $method, string $path, array $query = []){
 		$headers = ['DOLAPIKEY: '.$this -> token];
-		$method = strtoupper($method);
-		$query = count($query) > 0 ? sprintf("%s?%s", $url, http_build_query($query)) : '';
+		$method = strtoupper($method);		
+		$query = count($query) > 0 ? sprintf("?%s", http_build_query($query)) : '';
+		$url = $this -> url.$path.$query;
 
 		$curl = curl_init();
 
@@ -91,7 +92,7 @@ class Dolibarr{
 		// curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		// curl_setopt($curl, CURLOPT_USERPWD, "username:password");
 
-		curl_setopt($curl, CURLOPT_URL, $this -> url.$path);
+		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -99,7 +100,7 @@ class Dolibarr{
 		
 		$this -> response = new Response();
 		$this -> response -> status = isset($response['error']) ? false : true;
-		$this -> response -> data = isset($response['error']) ? array_merge($response['error'], ['path' => $path, 'payload' => $this -> payload]) : $response;
+		$this -> response -> data = isset($response['error']) ? array_merge($response['error'], ['url' => $url, 'payload' => $this -> payload]) : $response;
 		$this -> response -> code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 		curl_close($curl);
