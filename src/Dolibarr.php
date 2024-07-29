@@ -2,6 +2,7 @@
 
 namespace Dantepiazza\DolibarrSdk;
 
+use Exception;
 use Dantepiazza\DolibarrSdk\Adapter\Response;
 
 #[AllowDynamicProperties]
